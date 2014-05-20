@@ -5,10 +5,7 @@ $(function(){
 		var row 			= $(this).parents('tr'),
 				task_id		= $(this).attr('data-task-id');
 
-		// console.log(task_id);
-
 		$.ajax({
-
 			url: 	"/tasks/" + task_id,
 			type: 'PUT',
 			data: {
@@ -26,9 +23,12 @@ $(function(){
 					$(row).addClass("failed");
 				}
 			}
-
 		});
 
+	});
+
+	$('form#new_task').on('ajax:complete', function(event, data, status, xhr) {
+		console.log(data);
 	});
 
 });

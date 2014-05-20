@@ -1,15 +1,24 @@
 class TasksController < ApplicationController
 	def index
-		@tasks = Task.incomplete
-		# => render :index
+		@tasks = Task.all
+		# render @tasks
+	end
+
+	def create
+		@task = Task.new(task_params)
+		if @task.save
+			render @task
+		else
+			render nothing: true
+		end
 	end
 
 	def update
 		@task = Task.find(params[:id])
 	 	if @task.update_attributes(task_params)
 		 	respond_to do |format|
-		 		format.js
-		 		# render :update => currently update.js.erb
+		 		format.js { render json: @task }
+		 		
 		 		format.html { redirect_to tasks_path }
 		 	end
 		else
@@ -23,6 +32,6 @@ class TasksController < ApplicationController
 	private
 
 	def task_params
-		params.require(:task).permit(:title, :completed)
+		params.require(:task).permit(:title, :completed, :due_date, :user_id)
 	end
 end

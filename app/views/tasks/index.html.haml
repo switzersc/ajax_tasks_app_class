@@ -1,9 +1,17 @@
 %table
 	%thead
 		%th Title
+		%th User
 		%th Complete?
 	%tbody
 		- @tasks.each do |task|
 			%tr
 				%td= task.title
+				%td= task.user.name if task.user
 				%td= check_box_tag "completed", "1", task.completed, data: { "task-id" => task.id }
+
+= form_for Task.new, remote: true do |f|
+	= f.hidden_field :user_id, value: User.first.id
+	= f.text_field :title
+	= f.date_field :due_date
+	= f.submit "Add Task"

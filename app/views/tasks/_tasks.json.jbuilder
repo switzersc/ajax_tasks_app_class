@@ -1,0 +1,1 @@
+json.partial! "tasks/task", collection: @tasks, as: :task
