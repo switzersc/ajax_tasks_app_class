@@ -1,0 +1,7 @@
+collection :users => @users do |user|
+  attributes :name
+
+  collection :tasks => user.tasks do
+  	attributes :title, :due_date
+  end
+end

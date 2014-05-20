@@ -1,0 +1,7 @@
+%ul#userList
+	- @users.each do |user|
+		%li= user.name
+
+= form_for User.new, remote: true do |f|
+	= f.text_field :name
+	= f.submit

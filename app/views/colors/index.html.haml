@@ -1,0 +1,8 @@
+%ul#colorList
+	- @colors.each do |c|
+		%li= c.name
+
+= form_for Color.new, remote: true do |f|
+	= f.text_field :name
+	= f.hidden_field :user_id, value: User.last.id
+	= f.submit

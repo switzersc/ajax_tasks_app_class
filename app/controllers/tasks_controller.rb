@@ -1,13 +1,17 @@
 class TasksController < ApplicationController
 	def index
 		@tasks = Task.all
-		# render @tasks
+		respond_to do |format|
+			format.json  # renders 'index.json.jbuilder' for '/tasks.json', and that file calls on the partial 'tasks/tasks'
+			format.html 
+		end
 	end
 
 	def create
+		@tasks = Task.all
 		@task = Task.new(task_params)
 		if @task.save
-			render @task
+			render :index
 		else
 			render nothing: true
 		end

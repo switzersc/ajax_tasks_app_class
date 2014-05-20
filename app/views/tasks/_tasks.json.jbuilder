@@ -1,1 +1,1 @@
-json.partial! "tasks/task", collection: @tasks, as: :task
+json.array! @tasks, :title, :due_date
